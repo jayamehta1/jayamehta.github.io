@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Developer Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><text x="10" y="50" font-size="40" opacity="0.1" fill="white">{ }</text></svg>');
+            animation: slide 20s linear infinite;
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(100px); }
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        nav {
+            background: #2d3748;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav ul li {
+            margin: 0 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        nav ul li a:hover {
+            background: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        section {
+            background: white;
+            margin-bottom: 2.5rem;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            color: #667eea;
+            margin-bottom: 2rem;
+            font-size: 2.2rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.8rem;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: #764ba2;
+        }
+
+        .about-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: linear-gradient(135deg, #f6f8fb 0%, #ffffff 100%);
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 5px solid #667eea;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.25);
+            border-left-color: #764ba2;
+        }
+
+        .skill-card h3 {
+            color: #2d3748;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-card ul {
+            list-style: none;
+        }
+
+        .skill-card li {
+            padding: 0.4rem 0;
+            color: #555;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .skill-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            transition: all 0.3s;
+            border: 2px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+            border-color: #667eea;
+        }
+
+        .project-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .project-card p {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(102, 126, 234, 0.3);
+        }
+
+        .experience-timeline {
+            position: relative;
+            padding-left: 3rem;
+            margin-top: 2rem;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #667eea, #764ba2);
+        }
+
+        .experience-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 2rem;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -3.5rem;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #667eea;
+            border: 4px solid white;
+            box-shadow: 0 0 0 3px #667eea;
+        }
+
+        .experience-item h3 {
+            color: #667eea;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-item .date {
+            color: #888;
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+            font-style: italic;
+        }
+
+        .experience-item p {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f6f8fb 0%, #ffffff 100%);
+            border-radius: 12px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .contact-info strong {
+            display: block;
+            color: #2d3748;
+            margin-bottom: 0.3rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-info p {
+            color: #667eea;
+            font-size: 0.95rem;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+
+            .experience-timeline {
+                padding-left: 2rem;
+            }
+
+            .experience-item {
+                padding-left: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>jaya mehta</h1>
+        <p>Full Stack Developer | Problem Solver | Tech Enthusiast</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <section id="about">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <p>Passionate full-stack developer with a strong foundation in modern web technologies and software engineering principles. I specialize in creating scalable, user-friendly applications that solve real-world problems. With a keen eye for detail and a commitment to writing clean, maintainable code, I thrive in collaborative environments where innovation and continuous learning are valued.</p>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>Frontend Development</h3>
+                    <ul>
+                        <li>HTML5 & CSS3</li>
+                        <li>JavaScript (ES6+)</li>
+                        <li>React.js & Redux</li>
+                        <li>Vue.js</li>
+                        <li>TypeScript</li>
+                        <li>Responsive Design</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3>Backend Development</h3>
+                    <ul>
+                        <li>Node.js & Express</li>
+                        <li>Python & Django</li>
+                        <li>RESTful APIs</li>
+                        <li>GraphQL</li>
+                        <li>Microservices</li>
+                        <li>Authentication & Security</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3>Database & DevOps</h3>
+                    <ul>
+                        <li>MongoDB & Mongoose</li>
+                        <li>PostgreSQL & MySQL</li>
+                        <li>Redis</li>
+                        <li>Docker & Kubernetes</li>
+                        <li>AWS & Azure</li>
+                        <li>CI/CD Pipelines</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3>Tools & Methods</h3>
+                    <ul>
+                        <li>Git & GitHub</li>
+                        <li>Agile & Scrum</li>
+                        <li>Jest & Testing</li>
+                        <li>Webpack & Vite</li>
+                        <li>Linux/Unix</li>
+                        <li>VS Code & IntelliJ</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>E-Commerce Platform</h3>
+                    <p>Full-featured online shopping platform with user authentication, product catalog, shopping cart, payment processing, and order management. Includes admin dashboard for inventory and sales tracking.</p>
+                    <div class="project-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">MongoDB</span>
+                        <span class="tag">Stripe</span>
+                        <span class="tag">Redux</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Real-Time Chat Application</h3>
+                    <p>Scalable messaging platform with private and group chats, file sharing, emoji reactions, and typing indicators. Built with WebSocket for instant communication and optimized for performance.</p>
+                    <div class="project-tags">
+                        <span class="tag">Vue.js</span>
+                        <span class="tag">Socket.io</span>
+                        <span class="tag">Express</span>
+                        <span class="tag">PostgreSQL</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Project Management Tool</h3>
+                    <p>Collaborative workspace for teams with kanban boards, task assignments, progress tracking, and deadline management. Features drag-and-drop interface and real-time updates across team members.</p>
+                    <div class="project-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">GraphQL</span>
+                        <span class="tag">Docker</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Social Media Dashboard</h3>
+                    <p>Analytics platform integrating multiple social media APIs to provide unified insights, scheduling capabilities, and performance metrics. Includes data visualization and export features.</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Django</span>
+                        <span class="tag">REST API</span>
+                        <span class="tag">Chart.js</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>AI-Powered Content Generator</h3>
+                    <p>Web application leveraging machine learning to generate marketing copy, blog posts, and social media content. Features template customization and multiple output formats.</p>
+                    <div class="project-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">OpenAI API</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">AWS</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Fitness Tracking App</h3>
+                    <p>Mobile-responsive fitness application with workout logging, progress charts, meal planning, and social features. Integrates with wearable devices for automated data sync.</p>
+                    <div class="project-tags">
+                        <span class="tag">React Native</span>
+                        <span class="tag">Firebase</span>
+                        <span class="tag">Redux</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2>Professional Experience</h2>
+            <div class="experience-timeline">
+                <div class="experience-item">
+                    <h3>Senior Full Stack Developer</h3>
+                    <p class="date">Tech Solutions Inc. | Jan 2022 - Present</p>
+                    <p>Leading development of enterprise web applications serving 100K+ users. Architected and implemented microservices infrastructure, reducing response times by 60%. Mentoring junior developers and conducting code reviews to maintain high code quality standards.</p>
+                </div>
+                <div class="experience-item">
+                    <h3>Full Stack Developer</h3>
+                    <p class="date">Digital Innovations Ltd. | Mar 2020 - Dec 2021</p>
+                    <p>Developed and maintained multiple client-facing web applications using React and Node.js. Collaborated with UX designers to implement responsive, accessible interfaces. Implemented CI/CD pipelines reducing deployment time by 40%.</p>
+                </div>
+                <div class="experience-item">
+                    <h3>Junior Developer</h3>
+                    <p class="date">StartUp Hub | Jun 2018 - Feb 2020</p>
+                    <p>Contributed to front-end development of SaaS platform using modern JavaScript frameworks. Participated in agile development process and daily standups. Wrote unit tests achieving 85% code coverage.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Get In Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-info">
+                        <strong>Email</strong>
+                        <p>your.email@example.com</p>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">📱</div>
+                    <div class="contact-info">
+                        <strong>Phone</strong>
+                        <p>+1 (555) 123-4567</p>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">💼</div>
+                    <div class="contact-info">
+                        <strong>LinkedIn</strong>
+                        <p>linkedin.com/in/yourprofile</p>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">🐙</div>
+                    <div class="contact-info">
+                        <strong>GitHub</strong>
+                        <p>github.com/yourusername</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Your Name. Crafted with passion and code.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

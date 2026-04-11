@@ -1,771 +1,697 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jaya Mehta - Software Engineer</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          sans-serif;
-        line-height: 1.6;
-        color: #1a202c;
-        background: #0f0f0f;
-        overflow-x: hidden;
-      }
-
-      /* Animated gradient background */
-      .animated-bg {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #0a0a0a;
-        z-index: -1;
-      }
-
-      .animated-bg::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #667eea);
-        background-size: 400% 400%;
-        animation: gradientShift 15s ease infinite;
-        opacity: 0.3;
-      }
-
-      .animated-bg::after {
-        content: "🐱";
-        position: absolute;
-        font-size: 150px;
-        opacity: 0.05;
-        animation: floatCat 20s ease-in-out infinite;
-        filter: grayscale(100%);
-      }
-
-      @keyframes gradientShift {
-        0%,
-        100% {
-          background-position: 0% 50%;
-        }
-        50% {
-          background-position: 100% 50%;
-        }
-      }
-
-      @keyframes floatCat {
-        0%,
-        100% {
-          top: 10%;
-          left: 10%;
-          transform: rotate(-15deg);
-        }
-        25% {
-          top: 60%;
-          left: 80%;
-          transform: rotate(5deg);
-        }
-        50% {
-          top: 20%;
-          left: 70%;
-          transform: rotate(-10deg);
-        }
-        75% {
-          top: 70%;
-          left: 20%;
-          transform: rotate(8deg);
-        }
-      }
-
-      /* Hero Section */
-      .hero {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        padding: 2rem;
-      }
-
-      .hero-content {
-        text-align: center;
-        color: white;
-        z-index: 2;
-      }
-
-      .hero h1 {
-        font-size: clamp(3rem, 8vw, 6rem);
-        font-weight: 800;
-        margin-bottom: 1rem;
-        letter-spacing: -3px;
-        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        animation: fadeInUp 1s ease;
-      }
-
-      .hero-subtitle {
-        font-size: clamp(1.2rem, 3vw, 1.8rem);
-        margin-bottom: 2rem;
-        opacity: 0.95;
-        animation: fadeInUp 1.2s ease;
-      }
-
-      .hero-description {
-        max-width: 700px;
-        margin: 0 auto 3rem;
-        font-size: 1.1rem;
-        line-height: 1.8;
-        opacity: 0.9;
-        animation: fadeInUp 1.4s ease;
-      }
-
-      .cta-buttons {
-        display: flex;
-        gap: 1.5rem;
-        justify-content: center;
-        flex-wrap: wrap;
-        animation: fadeInUp 1.6s ease;
-      }
-
-      .btn {
-        padding: 1rem 2.5rem;
-        font-size: 1.1rem;
-        font-weight: 600;
-        border: none;
-        border-radius: 50px;
-        cursor: pointer;
-        transition: all 0.3s;
-        text-decoration: none;
-        display: inline-block;
-      }
-
-      .btn-primary {
-        background: white;
-        color: #667eea;
-      }
-
-      .btn-secondary {
-        background: rgba(255, 255, 255, 0.2);
-        color: white;
-        backdrop-filter: blur(10px);
-        border: 2px solid rgba(255, 255, 255, 0.3);
-      }
-
-      .btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      }
-
-      /* Navigation */
-      nav {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        background: rgba(15, 15, 15, 0.95);
-        backdrop-filter: blur(10px);
-        padding: 1rem 2rem;
-        z-index: 1000;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      }
-
-      nav ul {
-        list-style: none;
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        flex-wrap: wrap;
-      }
-
-      nav a {
-        color: white;
-        text-decoration: none;
-        font-weight: 600;
-        padding: 0.5rem 1rem;
-        border-radius: 8px;
-        transition: all 0.3s;
-      }
-
-      nav a:hover {
-        background: rgba(102, 126, 234, 0.3);
-      }
-
-      /* Main Content */
-      .content-wrapper {
-        position: relative;
-        z-index: 1;
-      }
-
-      section {
-        max-width: 1400px;
-        margin: 0 auto;
-        padding: 5rem 2rem;
-      }
-
-      .section-title {
-        font-size: clamp(2.5rem, 5vw, 4rem);
-        color: white;
-        margin-bottom: 3rem;
-        text-align: center;
-        font-weight: 700;
-        position: relative;
-        display: inline-block;
-        width: 100%;
-      }
-
-      .section-title::after {
-        content: "";
-        position: absolute;
-        bottom: -10px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100px;
-        height: 4px;
-        background: white;
-        border-radius: 2px;
-      }
-
-      /* About Section */
-      .about-card {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(20px);
-        padding: 3rem;
-        border-radius: 20px;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        max-width: 900px;
-        margin: 0 auto;
-      }
-
-      .about-card p {
-        font-size: 1.15rem;
-        line-height: 1.9;
-        color: #2d3748;
-      }
-
-      /* Skills Grid */
-      .skills-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-      }
-
-      .skill-card {
-        background: rgba(255, 255, 255, 0.95);
-        padding: 2.5rem;
-        border-radius: 20px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-        transition: all 0.4s;
-        border: 2px solid transparent;
-      }
-
-      .skill-card:hover {
-        transform: translateY(-10px) scale(1.02);
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        border-color: rgba(102, 126, 234, 0.5);
-      }
-
-      .skill-card h3 {
-        color: #667eea;
-        font-size: 1.5rem;
-        margin-bottom: 1.5rem;
-        font-weight: 700;
-      }
-
-      .skill-card ul {
-        list-style: none;
-      }
-
-      .skill-card li {
-        padding: 0.6rem 0;
-        color: #4a5568;
-        position: relative;
-        padding-left: 2rem;
-        font-size: 1.05rem;
-      }
-
-      .skill-card li::before {
-        content: "◆";
-        position: absolute;
-        left: 0;
-        color: #667eea;
-        font-size: 1.2rem;
-      }
-
-      /* Projects Grid */
-      .projects-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: 2.5rem;
-      }
-
-      .project-card {
-        background: rgba(255, 255, 255, 0.95);
-        padding: 2.5rem;
-        border-radius: 20px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-        transition: all 0.4s;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .project-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 5px;
-        background: linear-gradient(90deg, #667eea, #764ba2);
-        transform: scaleX(0);
-        transition: transform 0.4s;
-      }
-
-      .project-card:hover::before {
-        transform: scaleX(1);
-      }
-
-      .project-card:hover {
-        transform: translateY(-15px);
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      }
-
-      .project-card h3 {
-        color: #667eea;
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-        font-weight: 700;
-      }
-
-      .project-card p {
-        color: #4a5568;
-        line-height: 1.8;
-        margin-bottom: 1.5rem;
-        font-size: 1.05rem;
-      }
-
-      .project-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.7rem;
-      }
-
-      .tag {
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        color: white;
-        padding: 0.5rem 1rem;
-        border-radius: 25px;
-        font-size: 0.9rem;
-        font-weight: 600;
-        box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
-      }
-
-      /* Experience Timeline */
-      .timeline {
-        position: relative;
-        padding-left: 4rem;
-        max-width: 1000px;
-        margin: 0 auto;
-      }
-
-      .timeline::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        width: 4px;
-        background: linear-gradient(
-          180deg,
-          rgba(255, 255, 255, 0.8),
-          rgba(255, 255, 255, 0.3)
-        );
-        border-radius: 2px;
-      }
-
-      .timeline-item {
-        position: relative;
-        margin-bottom: 4rem;
-        background: rgba(255, 255, 255, 0.95);
-        padding: 2.5rem;
-        border-radius: 20px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-        transition: all 0.3s;
-      }
-
-      .timeline-item:hover {
-        transform: translateX(10px);
-        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
-      }
-
-      .timeline-item::before {
-        content: "";
-        position: absolute;
-        left: -4.5rem;
-        top: 2.5rem;
-        width: 25px;
-        height: 25px;
-        border-radius: 50%;
-        background: white;
-        border: 5px solid #667eea;
-        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
-      }
-
-      .timeline-item h3 {
-        color: #667eea;
-        font-size: 1.6rem;
-        margin-bottom: 0.5rem;
-        font-weight: 700;
-      }
-
-      .timeline-date {
-        color: #718096;
-        font-size: 1rem;
-        margin-bottom: 1rem;
-        font-style: italic;
-      }
-
-      .timeline-item p {
-        color: #4a5568;
-        line-height: 1.9;
-        font-size: 1.05rem;
-      }
-
-      /* Contact Section */
-      .contact-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 2rem;
-        max-width: 1000px;
-        margin: 0 auto;
-      }
-
-      .contact-card {
-        background: rgba(255, 255, 255, 0.95);
-        padding: 2rem;
-        border-radius: 20px;
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-        transition: all 0.3s;
-      }
-
-      .contact-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
-      }
-
-      .contact-icon {
-        width: 70px;
-        height: 70px;
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        font-size: 2rem;
-        flex-shrink: 0;
-        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
-      }
-
-      .contact-info strong {
-        display: block;
-        color: #2d3748;
-        margin-bottom: 0.3rem;
-        font-size: 1.1rem;
-      }
-
-      .contact-info a {
-        color: #667eea;
-        text-decoration: none;
-        font-size: 0.95rem;
-        word-break: break-all;
-      }
-
-      .contact-info a:hover {
-        text-decoration: underline;
-      }
-
-      /* Footer */
-      footer {
-        text-align: center;
-        padding: 3rem 2rem;
-        color: white;
-        background: rgba(0, 0, 0, 0.3);
-        backdrop-filter: blur(10px);
-      }
-
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(40px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      @media (max-width: 768px) {
-        nav ul {
-          gap: 1rem;
-        }
-
-        .timeline {
-          padding-left: 2.5rem;
-        }
-
-        .timeline-item::before {
-          left: -3.2rem;
-        }
-
-        .projects-grid,
-        .skills-grid {
-          grid-template-columns: 1fr;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="animated-bg"></div>
-
-    <nav>
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-
-    <div class="hero">
-      <div class="hero-content">
-        <h1>Jaya Mehta</h1>
-        <div class="hero-subtitle">
-          Senior Software Engineer | Pentesting Expert | AI Innovator
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jaya Mehta — Security Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,400;1,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #F4EFE6;
+  --cream2: #EDE7DA;
+  --ink: #161310;
+  --ink2: #2E2924;
+  --amber: #C8820A;
+  --amber-light: #F0A52A;
+  --navy: #1A2744;
+  --muted: #7A6F62;
+  --border: #D5CDBF;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Outfit', sans-serif;
+  cursor: none;
+  overflow-x: hidden;
+}
+.cursor {
+  width: 12px; height: 12px;
+  background: var(--amber);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+.cursor-ring {
+  width: 36px; height: 36px;
+  border: 1.5px solid var(--amber);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: all 0.35s ease;
+  opacity: 0.5;
+}
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 64px;
+  background: rgba(244,239,230,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-mark {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  color: var(--ink);
+}
+.nav-mark span { color: var(--amber); }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links a {
+  font-size: 13px; font-weight: 500; color: var(--muted);
+  text-decoration: none; letter-spacing: 0.5px; text-transform: uppercase; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--amber); }
+
+/* HERO */
+#hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+}
+.hero-left {
+  background: var(--navy);
+  padding: 160px 72px 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  overflow: hidden;
+}
+.hero-left::before {
+  content: 'SEC';
+  position: absolute;
+  top: 60px; left: -20px;
+  font-family: 'DM Serif Display', serif;
+  font-size: 160px;
+  color: rgba(255,255,255,0.03);
+  pointer-events: none;
+  letter-spacing: -6px;
+}
+.hero-eyebrow {
+  font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--amber-light); margin-bottom: 32px;
+  opacity: 0; animation: slideRight 0.9s 0.3s ease forwards;
+}
+.hero-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(56px, 6vw, 88px);
+  line-height: 1; letter-spacing: -2px; color: var(--cream);
+  opacity: 0; animation: slideRight 0.9s 0.5s ease forwards;
+}
+.hero-name em { font-style: italic; color: var(--amber-light); display: block; }
+.hero-rule {
+  width: 60px; height: 2px; background: var(--amber);
+  margin: 36px 0; opacity: 0; animation: slideRight 0.9s 0.7s ease forwards;
+}
+.hero-tagline {
+  font-size: 15px; color: rgba(244,239,230,0.55); line-height: 1.8;
+  max-width: 340px; font-weight: 300;
+  opacity: 0; animation: slideRight 0.9s 0.9s ease forwards;
+}
+.hero-right {
+  background: var(--cream2);
+  padding: 160px 72px 120px 64px;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  position: relative;
+}
+.big-number {
+  font-family: 'DM Serif Display', serif;
+  font-size: 200px; color: var(--cream); line-height: 1;
+  position: absolute; top: 80px; right: 40px;
+  letter-spacing: -8px; pointer-events: none;
+  opacity: 0; animation: fadeIn 1s 1.1s ease forwards;
+}
+.hero-stats-col {
+  display: flex; flex-direction: column; gap: 40px;
+  opacity: 0; animation: slideLeft 0.9s 0.8s ease forwards;
+}
+.stat-row { padding-bottom: 40px; border-bottom: 1px solid var(--border); }
+.stat-row:last-child { border-bottom: none; padding-bottom: 0; }
+.stat-row .num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 52px; color: var(--ink); letter-spacing: -2px; line-height: 1;
+}
+.stat-row .num span { color: var(--amber); }
+.stat-row .lbl {
+  font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted); margin-top: 6px;
+}
+.hero-contact-bar {
+  position: relative; grid-column: 1 / -1;
+  background: var(--ink);
+  display: flex; align-items: center; padding: 20px 72px; gap: 48px;
+  opacity: 0; animation: fadeIn 0.9s 1.2s ease forwards;
+}
+.contact-item { font-size: 13px; color: rgba(244,239,230,0.5); font-weight: 300; }
+.contact-item strong { color: var(--cream); font-weight: 500; display: block; font-size: 14px; }
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes slideLeft {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes fadeIn { to { opacity: 1; } }
+
+.s-header { display: flex; align-items: flex-end; gap: 24px; margin-bottom: 64px; }
+.s-num {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: 72px; color: var(--border); line-height: 1; letter-spacing: -3px;
+}
+.s-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(36px, 4vw, 56px); letter-spacing: -1.5px; line-height: 1; padding-bottom: 8px;
+}
+
+/* ABOUT */
+#about { padding: 120px 72px; max-width: 1300px; margin: 0 auto; }
+.about-layout { display: grid; grid-template-columns: 5fr 4fr; gap: 100px; align-items: start; }
+.about-body p {
+  font-size: 18px; line-height: 1.9; color: var(--ink2);
+  font-weight: 300; margin-bottom: 24px;
+}
+.about-body p strong { font-weight: 600; color: var(--ink); }
+.about-pull {
+  font-family: 'DM Serif Display', serif; font-size: 26px;
+  line-height: 1.5; color: var(--navy);
+  border-left: 3px solid var(--amber); padding-left: 28px;
+  margin: 40px 0; letter-spacing: -0.5px; font-style: italic;
+}
+.aside-card {
+  background: var(--ink); color: var(--cream);
+  padding: 40px; position: sticky; top: 100px;
+}
+.aside-card .aside-label {
+  font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--amber-light); margin-bottom: 28px;
+}
+.aside-item { padding: 20px 0; border-bottom: 1px solid rgba(244,239,230,0.08); }
+.aside-item:last-child { border-bottom: none; }
+.aside-item .key {
+  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(244,239,230,0.4); margin-bottom: 6px;
+}
+.aside-item .val { font-size: 15px; color: var(--cream); font-weight: 400; }
+
+/* SKILLS */
+#skills { background: var(--ink); padding: 120px 72px; color: var(--cream); }
+#skills .s-num { color: rgba(255,255,255,0.07); }
+#skills .s-title { color: var(--cream); }
+.skills-masonry {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.skill-block {
+  background: var(--ink); padding: 40px 36px;
+  transition: background 0.3s; position: relative; overflow: hidden;
+}
+.skill-block::after {
+  content: attr(data-icon);
+  position: absolute; bottom: -10px; right: 16px;
+  font-size: 80px; opacity: 0.05; pointer-events: none;
+  transition: transform 0.3s, opacity 0.3s;
+}
+.skill-block:hover { background: var(--navy); }
+.skill-block:hover::after { opacity: 0.12; transform: scale(1.1); }
+.skill-block h3 {
+  font-family: 'DM Serif Display', serif; font-size: 22px;
+  color: var(--cream); margin-bottom: 8px;
+}
+.skill-block .skill-desc { font-size: 13px; color: rgba(244,239,230,0.4); line-height: 1.6; margin-bottom: 24px; font-weight: 300; }
+.pill-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
+.pill {
+  font-size: 11px; padding: 5px 12px;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(244,239,230,0.6); border-radius: 100px;
+  transition: all 0.2s;
+}
+.pill:hover { border-color: var(--amber); color: var(--amber-light); }
+
+/* EXPERIENCE */
+#experience { padding: 120px 72px; max-width: 1300px; margin: 0 auto; }
+.exp-stack { display: flex; flex-direction: column; }
+.exp-row {
+  display: grid; grid-template-columns: 200px 1fr;
+  gap: 60px; padding: 48px 0; border-top: 1px solid var(--border);
+  transition: all 0.3s; cursor: default;
+}
+.exp-row:last-child { border-bottom: 1px solid var(--border); }
+.exp-row:hover { background: var(--cream2); margin: 0 -72px; padding-left: 72px; padding-right: 72px; }
+.exp-period { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); line-height: 1.6; font-weight: 500; }
+.exp-badge-new {
+  display: inline-block; margin-top: 10px;
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  padding: 3px 10px; background: var(--amber); color: #fff;
+}
+.exp-co { font-family: 'DM Serif Display', serif; font-size: 32px; letter-spacing: -1px; margin-bottom: 4px; }
+.exp-title-text { font-size: 15px; color: var(--amber); font-weight: 500; letter-spacing: 0.5px; margin-bottom: 20px; }
+.exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.exp-bullets li { font-size: 15px; color: var(--muted); line-height: 1.7; padding-left: 18px; position: relative; font-weight: 300; }
+.exp-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--border); }
+
+/* PROJECTS */
+#projects { background: var(--cream2); padding: 120px 72px; }
+.projects-layout { max-width: 1300px; margin: 0 auto; }
+.project-hero-card {
+  background: var(--navy); color: var(--cream);
+  padding: 64px; margin-bottom: 2px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+  position: relative; overflow: hidden;
+}
+.project-hero-card::before {
+  content: 'AI';
+  position: absolute; right: -20px; top: -40px;
+  font-family: 'DM Serif Display', serif; font-size: 260px;
+  color: rgba(255,255,255,0.03); pointer-events: none; line-height: 1;
+}
+.p-label { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-light); margin-bottom: 20px; }
+.project-hero-card h3 { font-family: 'DM Serif Display', serif; font-size: 40px; letter-spacing: -1px; line-height: 1.15; margin-bottom: 20px; }
+.project-hero-card p { font-size: 15px; color: rgba(244,239,230,0.6); line-height: 1.8; font-weight: 300; margin-bottom: 32px; }
+.metric-row { display: flex; gap: 40px; }
+.m-item .m-val { font-family: 'DM Serif Display', serif; font-size: 44px; color: var(--amber-light); letter-spacing: -2px; line-height: 1; }
+.m-item .m-lbl { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(244,239,230,0.4); margin-top: 6px; }
+.agent-flow { display: flex; flex-direction: column; }
+.agent-node {
+  padding: 16px 20px; border: 1px solid rgba(255,255,255,0.1);
+  font-size: 13px; color: rgba(244,239,230,0.7);
+  display: flex; align-items: center; gap: 12px;
+  transition: all 0.2s; margin-bottom: -1px;
+}
+.agent-node:hover { background: rgba(200,130,10,0.15); border-color: var(--amber); color: var(--cream); z-index: 1; position: relative; }
+.a-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); flex-shrink: 0; }
+.agent-connector { font-size: 11px; color: rgba(244,239,230,0.2); padding-left: 32px; height: 16px; display: flex; align-items: center; }
+.small-projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 2px; }
+.small-proj-card {
+  background: var(--cream); padding: 36px;
+  transition: all 0.3s; border-bottom: 3px solid transparent;
+}
+.small-proj-card:hover { border-bottom-color: var(--amber); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
+.sp-num { font-family: 'Playfair Display', serif; font-style: italic; font-size: 40px; color: var(--border); line-height: 1; margin-bottom: 16px; }
+.small-proj-card h3 { font-family: 'DM Serif Display', serif; font-size: 20px; letter-spacing: -0.5px; margin-bottom: 12px; }
+.small-proj-card p { font-size: 14px; color: var(--muted); line-height: 1.7; font-weight: 300; margin-bottom: 20px; }
+
+/* CONTACT */
+#contact { padding: 120px 72px; max-width: 1300px; margin: 0 auto; }
+.contact-split { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; }
+.contact-left h2 { font-family: 'DM Serif Display', serif; font-size: clamp(48px, 5vw, 76px); letter-spacing: -2px; line-height: 1.05; margin-bottom: 24px; }
+.contact-left h2 em { font-style: italic; color: var(--amber); }
+.contact-left p { font-size: 16px; color: var(--muted); line-height: 1.8; font-weight: 300; max-width: 400px; }
+.contact-right { display: flex; flex-direction: column; }
+.contact-line {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 24px 0; border-top: 1px solid var(--border);
+  text-decoration: none; transition: all 0.2s; color: var(--ink);
+}
+.contact-line:last-child { border-bottom: 1px solid var(--border); }
+.contact-line:hover { padding-left: 16px; color: var(--amber); }
+.cl-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); min-width: 80px; }
+.cl-val { font-size: 16px; font-weight: 500; }
+.cl-arrow { font-size: 18px; transition: transform 0.2s; }
+.contact-line:hover .cl-arrow { transform: translateX(6px); }
+.cta-block {
+  margin-top: 48px; padding: 40px; background: var(--ink); color: var(--cream);
+  display: flex; align-items: center; justify-content: space-between; gap: 32px;
+}
+.cta-block p { font-size: 20px; font-family: 'DM Serif Display', serif; font-style: italic; color: var(--cream); }
+.btn-amber {
+  flex-shrink: 0; padding: 16px 36px; background: var(--amber);
+  color: #fff; font-size: 13px; font-weight: 600; letter-spacing: 1.5px;
+  text-transform: uppercase; text-decoration: none; transition: all 0.2s; white-space: nowrap;
+}
+.btn-amber:hover { background: var(--amber-light); transform: translateY(-2px); }
+
+footer {
+  background: var(--ink); color: rgba(244,239,230,0.3);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 28px 72px; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
+}
+footer strong { color: var(--amber); }
+
+.reveal { opacity: 0; transform: translateY(50px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.up { opacity: 1; transform: none; }
+
+@media (max-width: 900px) {
+  nav { padding: 20px 28px; }
+  nav .nav-links { display: none; }
+  #hero { grid-template-columns: 1fr; }
+  .hero-left, .hero-right { padding: 120px 28px 60px; }
+  .big-number { font-size: 100px; }
+  #about, #experience, #projects, #contact, #skills { padding: 80px 28px; }
+  .about-layout { grid-template-columns: 1fr; gap: 40px; }
+  .skills-masonry { grid-template-columns: 1fr; }
+  .exp-row { grid-template-columns: 1fr; gap: 16px; }
+  .exp-row:hover { margin: 0 -28px; padding-left: 28px; padding-right: 28px; }
+  .project-hero-card { grid-template-columns: 1fr; }
+  .small-projects { grid-template-columns: 1fr; }
+  .contact-split { grid-template-columns: 1fr; gap: 60px; }
+  footer { padding: 20px 28px; flex-direction: column; gap: 8px; text-align: center; }
+  .cta-block { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="ring"></div>
+
+<nav>
+  <div class="nav-mark">Jaya <span>Mehta</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero" style="position:relative;">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Security Engineer & AI Developer</div>
+    <h1 class="hero-name">Jaya<em>Mehta</em></h1>
+    <div class="hero-rule"></div>
+    <p class="hero-tagline">Building AI-powered security systems that redefine what automated penetration testing can achieve.</p>
+  </div>
+  <div class="hero-right">
+    <div class="big-number">3+</div>
+    <div class="hero-stats-col">
+      <div class="stat-row">
+        <div class="num">85<span>%</span></div>
+        <div class="lbl">Pentest time reduction</div>
+      </div>
+      <div class="stat-row">
+        <div class="num">100<span>+</span></div>
+        <div class="lbl">Concurrent security scans</div>
+      </div>
+      <div class="stat-row">
+        <div class="num">8.6</div>
+        <div class="lbl">Master's GPA — IT</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-contact-bar">
+    <div class="contact-item"><strong>jayamehta001@gmail.com</strong>Email</div>
+    <div class="contact-item"><strong>+91 63979 06349</strong>Phone</div>
+    <div class="contact-item"><strong>Uttarakhand, India</strong>Location</div>
+    <div class="contact-item"><strong>Remote Friendly</strong>Availability</div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="s-header reveal">
+    <div class="s-num">01</div>
+    <h2 class="s-title">About Me</h2>
+  </div>
+  <div class="about-layout">
+    <div class="about-body reveal">
+      <p>I'm a <strong>Senior Software Engineer</strong> based in Uttarakhand, India, with a rare combination of deep cybersecurity expertise and modern AI engineering skills.</p>
+      <div class="about-pull">"I don't just find vulnerabilities — I build the systems that find them automatically."</div>
+      <p>At <strong>Akitra</strong>, I've led VAPT initiatives, built serverless security infrastructure on AWS, and designed a multi-agent AI penetration testing platform that reduced testing time from 40 hours to just 6.</p>
+      <p>My work sits at the intersection of <strong>security engineering</strong> and <strong>agentic AI</strong> — orchestrating LangGraph pipelines, containerised Kali Linux environments, and distributed cloud systems into production-grade security tooling.</p>
+    </div>
+    <div class="reveal">
+      <div class="aside-card">
+        <div class="aside-label">Quick Profile</div>
+        <div class="aside-item">
+          <div class="key">Current Role</div>
+          <div class="val">Senior Software Engineer @ Akitra</div>
         </div>
-        <p class="hero-description">
-          Specializing in automated pentesting and agentic AI-driven security
-          testing. Building scalable microservices that integrate cutting-edge
-          security tools.
-        </p>
-        <div class="cta-buttons">
-          <a href="#projects" class="btn btn-primary">View Projects</a>
-          <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+        <div class="aside-item">
+          <div class="key">Education</div>
+          <div class="val">M.Sc. Information Technology<br>D.S.B Kumaun University — GPA 8.6</div>
+        </div>
+        <div class="aside-item">
+          <div class="key">Specialisation</div>
+          <div class="val">VAPT · Agentic AI · AWS</div>
+        </div>
+        <div class="aside-item">
+          <div class="key">Status</div>
+          <div class="val" style="color:#6bde9b">● Open to Opportunities</div>
         </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="content-wrapper">
-      <section id="about">
-        <h2 class="section-title">About Me</h2>
-        <div class="about-card">
-          <p>
-            Specializing in automated pentesting and agentic AI-driven testing.
-            Experienced in building scalable pentesting microservices using
-            Node.js and Python, integrating tools like ZAP, Nmap, OpenVAS,
-            Hydra, and Nikto for web, network, and API testing. Proven team lead
-            with a strong focus on automation, reliability, and scalable system
-            design.
-          </p>
-        </div>
-      </section>
-
-      <section id="skills">
-        <h2 class="section-title">Technical Arsenal</h2>
-        <div class="skills-grid">
-          <div class="skill-card">
-            <h3>Backend Development</h3>
-            <ul>
-              <li>Python</li>
-              <li>Node.js</li>
-              <li>RESTful APIs</li>
-              <li>Microservices Architecture</li>
-              <li>Authentication & Security</li>
-            </ul>
-          </div>
-          <div class="skill-card">
-            <h3>Pentesting Tools</h3>
-            <ul>
-              <li>OWASP ZAP (ZAPProxy)</li>
-              <li>Nmap</li>
-              <li>OpenVAS</li>
-              <li>Hydra</li>
-              <li>Nikto</li>
-              <li>Kali Linux</li>
-            </ul>
-          </div>
-          <div class="skill-card">
-            <h3>AI & Automation</h3>
-            <ul>
-              <li>LangChain & LangGraph</li>
-              <li>Agentic AI Systems</li>
-              <li>Automated Testing Frameworks</li>
-              <li>Git & GitHub</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section id="projects">
-        <h2 class="section-title">Featured Projects</h2>
-        <div class="projects-grid">
-          <div class="project-card">
-            <h3>IoT Food Spoilage Monitoring System</h3>
-            <p>
-              This project is an IoT-based food spoilage detector using Arduino
-              UNO, MQ-3 gas sensor, DHT11 sensor, and ESP8266 WiFi module. It
-              continuously monitors volatile gases, temperature, and humidity,
-              then uploads data to ThingSpeak for real-time tracking and
-              spoilage prediction.
-              <br /><br />
-              <strong>Key Features:</strong><br />
-              Detects volatile gases (ethanol, alcohol vapors, spoilage gases)
-              from food using MQ-3. <br />
-              Tracks temperature and humidity, which are critical spoilage
-              factors. <br />
-              Uploads sensor readings to ThingSpeak Cloud every 20 seconds. Can
-              be extended to send alerts when food spoilage thresholds are
-              reached.
-            </p>
-            <div class="project-tags">
-              <span class="tag">Arduino C</span>
-              <span class="tag">Arduino C++</span>
-              <span class="tag">Embedded Systems</span>
-            </div>
-          </div>
-          <div class="project-card">
-            <h3>Real-Time Chat Application</h3>
-            <p>
-              Developed a Python-based desktop GUI weather application that
-              fetches and displays real-time weather data for any city entered
-              by the user. The application makes live API calls and dynamically
-              updates weather information in the interface.
-              <br /><br />
-              <strong>Key Features:</strong><br />
-              City-based real-time weather lookup<br />
-              Displays temperature, min/max temperature, humidity, pressure,
-              wind speed<br />
-              Shows sunrise and sunset times<br />
-              Interactive GUI with keyboard input
-            </p>
-            <div class="project-tags">
-              <span class="tag">Python</span>
-              <span class="tag">Tkinter</span>
-              <span class="tag">REST APIs (OpenWeatherMap)</span>
-              <span class="tag">GUI development</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="experience">
-        <h2 class="section-title">Professional Journey</h2>
-        <div class="timeline">
-          <div class="timeline-item">
-            <h3>Senior Trainee</h3>
-            <div class="timeline-date">Akitra Inc. | Sep 2022 - Jan 2023</div>
-            <p>
-              Worked on the development of pentesting microservices using
-              Node.js and Python, building scalable, tool-based architectures
-              for automated security testing. Performed web application
-              pentesting using OWASP ZAP (ZAPProxy), integrating scans into
-              microservices. Mentored junior team members, reviewed code, and
-              ensured high-quality, secure implementations across services.
-            </p>
-          </div>
-          <div class="timeline-item">
-            <h3>Senior Software Engineer</h3>
-            <div class="timeline-date">Akitra Inc. | Jan 2023 - Present</div>
-            <p>
-              Worked as Team Lead for an automated pentesting team, building
-              fully automated pentesting microservices using tools like ZAP,
-              Nmap, and OpenVAS. Developed an agentic AI-based pentesting system
-              using LangGraph and LangChain, integrating Kali Linux tools such
-              as Hydra, Nikto, ZAP, and Nmap for network, web, and API security
-              testing.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact">
-        <h2 class="section-title">Let's Connect</h2>
-        <div class="contact-grid">
-          <div class="contact-card">
-            <div class="contact-icon">📧</div>
-            <div class="contact-info">
-              <strong>Email</strong>
-              <a href="mailto:jaya001@gmail.com">jaya001@gmail.com</a>
-            </div>
-          </div>
-          <div class="contact-card">
-            <div class="contact-icon">💼</div>
-            <div class="contact-info">
-              <strong>LinkedIn</strong>
-              <a
-                href="https://www.linkedin.com/in/jaya-mehta-394098207/"
-                target="_blank"
-                >jaya-mehta-394098207</a
-              >
-            </div>
-          </div>
-          <div class="contact-card">
-            <div class="contact-icon">🐙</div>
-            <div class="contact-info">
-              <strong>GitHub</strong>
-              <a href="https://github.com/jayamehta1" target="_blank"
-                >jayamehta1</a
-              >
-            </div>
-          </div>
-        </div>
-      </section>
+<section id="skills">
+  <div style="max-width:1300px;margin:0 auto;">
+    <div class="s-header reveal">
+      <div class="s-num">02</div>
+      <h2 class="s-title">Technical Skills</h2>
     </div>
+    <div class="skills-masonry reveal">
+      <div class="skill-block" data-icon="🔒">
+        <h3>Security & VAPT</h3>
+        <p class="skill-desc">Vulnerability assessment, penetration testing, and security analysis at scale.</p>
+        <div class="pill-wrap">
+          <span class="pill">ZAP Proxy</span><span class="pill">OpenVAS</span><span class="pill">Nmap</span><span class="pill">SQLMap</span><span class="pill">Nuclei</span><span class="pill">Kali Linux</span><span class="pill">OWASP</span>
+        </div>
+      </div>
+      <div class="skill-block" data-icon="🤖">
+        <h3>AI & Agent Systems</h3>
+        <p class="skill-desc">Designing multi-agent LLM pipelines and agentic AI architectures.</p>
+        <div class="pill-wrap">
+          <span class="pill">LangGraph</span><span class="pill">LangChain</span><span class="pill">OpenAI</span><span class="pill">Agentic AI</span><span class="pill">LLM</span>
+        </div>
+      </div>
+      <div class="skill-block" data-icon="☁️">
+        <h3>Cloud & Infrastructure</h3>
+        <p class="skill-desc">Serverless execution, container orchestration, and automated cloud pipelines.</p>
+        <div class="pill-wrap">
+          <span class="pill">AWS Lambda</span><span class="pill">AWS SQS</span><span class="pill">AWS S3</span><span class="pill">Kubernetes</span><span class="pill">Jenkins</span>
+        </div>
+      </div>
+      <div class="skill-block" data-icon="⚙️">
+        <h3>Backend Development</h3>
+        <p class="skill-desc">Scalable APIs, server-side logic, and full-stack application architecture.</p>
+        <div class="pill-wrap">
+          <span class="pill">Python</span><span class="pill">Node.js</span><span class="pill">Flask</span><span class="pill">Express.js</span><span class="pill">REST API</span>
+        </div>
+      </div>
+      <div class="skill-block" data-icon="🗄️">
+        <h3>Databases</h3>
+        <p class="skill-desc">Relational and NoSQL database design, security, and optimisation.</p>
+        <div class="pill-wrap">
+          <span class="pill">PostgreSQL</span><span class="pill">MongoDB</span><span class="pill">MySQL</span>
+        </div>
+      </div>
+      <div class="skill-block" data-icon="📡">
+        <h3>IoT & Embedded</h3>
+        <p class="skill-desc">Sensor integration, microcontrollers, and wireless communication protocols.</p>
+        <div class="pill-wrap">
+          <span class="pill">Arduino</span><span class="pill">Raspberry Pi</span><span class="pill">LoRa</span><span class="pill">Bluetooth</span><span class="pill">C/C++</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <footer>
-      <p>&copy; 2025 Jaya Mehta. Crafted with passion and code.</p>
-    </footer>
+<section id="experience">
+  <div class="s-header reveal">
+    <div class="s-num">03</div>
+    <h2 class="s-title">Experience</h2>
+  </div>
+  <div class="exp-stack reveal">
+    <div class="exp-row">
+      <div class="exp-side">
+        <div class="exp-period">Mar 2023<br>Present</div>
+        <div class="exp-badge-new">Current</div>
+      </div>
+      <div class="exp-main">
+        <div class="exp-co">Akitra</div>
+        <div class="exp-title-text">Senior Software Engineer · Remote</div>
+        <ul class="exp-bullets">
+          <li>Led VAPT projects using ZAP Proxy, OpenVAS, and Nmap — from identification through remediation.</li>
+          <li>Designed an AI-powered multi-agent penetration testing system (Python + LangGraph + AWS), cutting testing time by 85%.</li>
+          <li>Deployed SSL/TLS & email security as serverless AWS Lambda functions with SQS-based automation.</li>
+          <li>Built Flask modules automating vulnerability scans with PDF/XML/JSON report generation.</li>
+          <li>Created Node.js APIs for UI communication and secure S3 report retrieval.</li>
+          <li>Distributed scanning framework on Kubernetes enabling 100+ concurrent scans.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-row">
+      <div class="exp-side">
+        <div class="exp-period">Sep 2022<br>Feb 2023</div>
+      </div>
+      <div class="exp-main">
+        <div class="exp-co">Akitra</div>
+        <div class="exp-title-text">Senior Trainee · Remote</div>
+        <ul class="exp-bullets">
+          <li>Developed and deployed Node.js backend applications following security best practices.</li>
+          <li>Ran OWASP ZAP penetration tests, identifying and remediating web application vulnerabilities.</li>
+          <li>Managed PostgreSQL and MongoDB with secure configurations and optimised queries.</li>
+          <li>Authored vulnerability reports with detailed analysis and mitigation strategies.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-row">
+      <div class="exp-side">
+        <div class="exp-period">Feb 2022<br>Aug 2022</div>
+      </div>
+      <div class="exp-main">
+        <div class="exp-co">Open University<br>Uttarakhand</div>
+        <div class="exp-title-text">Intern — IoT Systems · Haldwani, India</div>
+        <ul class="exp-bullets">
+          <li>Built an IoT food monitoring system with temperature, humidity, and gas sensors.</li>
+          <li>Programmed Arduino and Raspberry Pi for real-time sensor data collection and processing.</li>
+          <li>Implemented Wi-Fi, Bluetooth, and LoRa wireless communication for remote monitoring.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <script>
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-          e.preventDefault();
-          const target = document.querySelector(this.getAttribute("href"));
-          if (target) {
-            target.scrollIntoView({ behavior: "smooth", block: "start" });
-          }
-        });
-      });
+<section id="projects">
+  <div class="projects-layout">
+    <div class="s-header reveal">
+      <div class="s-num" style="color:var(--border)">04</div>
+      <h2 class="s-title">Projects</h2>
+    </div>
+    <div class="project-hero-card reveal">
+      <div>
+        <div class="p-label">Featured Project — 01</div>
+        <h3>Multi-Agent Penetration Testing System</h3>
+        <p>An AI-powered security testing platform orchestrating 4 specialised agents for asset discovery, test strategy, command synthesis, and vulnerability analysis — with automated false-positive filtering and CVSS-based reporting.</p>
+        <div class="metric-row">
+          <div class="m-item"><div class="m-val">85%</div><div class="m-lbl">Time saved</div></div>
+          <div class="m-item"><div class="m-val">100+</div><div class="m-lbl">Concurrent</div></div>
+          <div class="m-item"><div class="m-val">30%</div><div class="m-lbl">Less noise</div></div>
+        </div>
+        <div class="pill-wrap" style="margin-top:28px;">
+          <span class="pill" style="border-color:rgba(200,130,10,0.4);color:var(--amber-light)">Python</span>
+          <span class="pill" style="border-color:rgba(200,130,10,0.4);color:var(--amber-light)">LangGraph</span>
+          <span class="pill" style="border-color:rgba(200,130,10,0.4);color:var(--amber-light)">AWS SQS</span>
+          <span class="pill" style="border-color:rgba(200,130,10,0.4);color:var(--amber-light)">Kubernetes</span>
+          <span class="pill" style="border-color:rgba(200,130,10,0.4);color:var(--amber-light)">Kali Linux</span>
+        </div>
+      </div>
+      <div class="agent-flow">
+        <div class="agent-node"><span class="a-dot"></span>Asset Discovery Agent</div>
+        <div class="agent-connector">↓ discovered targets</div>
+        <div class="agent-node"><span class="a-dot"></span>Strategy Generation Agent</div>
+        <div class="agent-connector">↓ test plan</div>
+        <div class="agent-node"><span class="a-dot"></span>Command Synthesis Agent</div>
+        <div class="agent-connector">↓ Kali pod execution</div>
+        <div class="agent-node"><span class="a-dot"></span>Vulnerability Analysis Agent</div>
+        <div class="agent-connector">↓ CVSS report → S3</div>
+      </div>
+    </div>
+    <div class="small-projects reveal">
+      <div class="small-proj-card">
+        <div class="sp-num">02</div>
+        <h3>Flask Security Scanner</h3>
+        <p>Web app scanning URLs and APIs via ZAP Proxy, with automated PDF report generation for security auditing.</p>
+        <div class="pill-wrap"><span class="pill">Flask</span><span class="pill">ZAP Proxy</span><span class="pill">Python</span></div>
+      </div>
+      <div class="small-proj-card">
+        <div class="sp-num">03</div>
+        <h3>Vendor Security Platform</h3>
+        <p>SSL/TLS & email security protocols deployed as AWS Lambda functions with SQS notification pipelines.</p>
+        <div class="pill-wrap"><span class="pill">AWS Lambda</span><span class="pill">SQS</span><span class="pill">Python</span></div>
+      </div>
+      <div class="small-proj-card">
+        <div class="sp-num">04</div>
+        <h3>IoT Food Monitor</h3>
+        <p>Real-time food safety system with temperature, humidity, and gas sensors using LoRa wireless transmission.</p>
+        <div class="pill-wrap"><span class="pill">Arduino</span><span class="pill">Raspberry Pi</span><span class="pill">LoRa</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.style.opacity = "1";
-              entry.target.style.transform = "translateY(0)";
-            }
-          });
-        },
-        { threshold: 0.1 }
-      );
+<section id="contact">
+  <div class="s-header reveal">
+    <div class="s-num">05</div>
+    <h2 class="s-title">Get In Touch</h2>
+  </div>
+  <div class="contact-split reveal">
+    <div class="contact-left">
+      <h2>Let's work <em>together</em></h2>
+      <p>Open to senior roles in cybersecurity, AI agent engineering, or security platform development. Remote-friendly and available now.</p>
+      <div class="cta-block">
+        <p>"The best security is automated security."</p>
+        <a href="mailto:jayamehta001@gmail.com" class="btn-amber">Hire Me</a>
+      </div>
+    </div>
+    <div class="contact-right">
+      <a href="mailto:jayamehta001@gmail.com" class="contact-line">
+        <span class="cl-label">Email</span>
+        <span class="cl-val">jayamehta001@gmail.com</span>
+        <span class="cl-arrow">→</span>
+      </a>
+      <a href="tel:+916397906349" class="contact-line">
+        <span class="cl-label">Phone</span>
+        <span class="cl-val">+91 63979 06349</span>
+        <span class="cl-arrow">→</span>
+      </a>
+      <a href="https://linkedin.com/in/jayamehta-394098207" target="_blank" class="contact-line">
+        <span class="cl-label">LinkedIn</span>
+        <span class="cl-val">jayamehta-394098207</span>
+        <span class="cl-arrow">→</span>
+      </a>
+      <div class="contact-line" style="cursor:default;">
+        <span class="cl-label">Location</span>
+        <span class="cl-val">Uttarakhand, India</span>
+        <span class="cl-arrow" style="opacity:0.2">→</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-      document.querySelectorAll("section").forEach((section) => {
-        section.style.opacity = "0";
-        section.style.transform = "translateY(40px)";
-        section.style.transition = "opacity 0.8s ease, transform 0.8s ease";
-        observer.observe(section);
-      });
-    </script>
-  </body>
+<footer>
+  <span>© 2025 Jaya Mehta</span>
+  <span>Senior Software Engineer · <strong>Security + AI</strong></span>
+  <span>Uttarakhand, India</span>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+  function animateRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+  document.querySelectorAll('a, button, .exp-row, .skill-block, .small-proj-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(2)';
+      ring.style.transform = 'translate(-50%,-50%) scale(1.5)';
+      ring.style.opacity = '0.8';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+      ring.style.transform = 'translate(-50%,-50%) scale(1)';
+      ring.style.opacity = '0.5';
+    });
+  });
+  const io = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) setTimeout(() => e.target.classList.add('up'), i * 80);
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
 </html>
